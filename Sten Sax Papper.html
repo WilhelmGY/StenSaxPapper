@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sten Påse Sax</title>
+    <style>
+    *{
+      padding: 0; margin: 0;
+    }
+    img{
+      height: 200px; width: 200px;
+    }
+    #lista{
+      border: solid black 2px;
+      width: 200px;
+    }
+    </style>
+  </head>
+  <body>
+
+    <!--Gör att ljud kan spelas upp-->
+    <audio id="lose">
+      <!--/mpeg är för .mp3 filer-->
+      <source src="nanimp3.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="win">
+      <source src="omae_wa_mou_shinderu.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="tie">
+      <source src="quack.mp3" type="audio/mpeg">
+    </audio>
+
+    <!--knapparna för sten, sax och påse-->
+    <div id="sten">
+      <!--GameStart(1) startar skriptet GameStart(x) när bilden klickas och sätter x = 1-->
+      <button id="sten" onclick="GameStart(1)"><img src="Sten.png" alt="Sten"></button>
+    </div>
+    <div id="sax">
+      <!--GameStart(2) startar skriptet GameStart(x) när bilden klickas och sätter x = 2-->
+      <button id="sax" onclick="GameStart(2)"><img src="sax.png" alt="Sax"></button>
+    </div>
+    <div id="påse">
+      <!--GameStart(3) startar skriptet GameStart(x) när bilden klickas och sätter x = 3-->
+      <button id="papper" onclick="GameStart(3)"><img src="papper.png" alt="Påse"></button>
+    </div>
+
+    <!--En lista som har resultat och vad båda valde-->
+    <div id="lista">
+      <p id="result"></p>
+      <p id="du"></p>
+      <p id="dat"></p>
+    </div>
+
+    <script>
+      function GameStart(x){
+        //Sätter variablerna lose, win och tie till respektive ljudfil
+        var lose = document.getElementById("lose");
+        var win = document.getElementById("win");
+        var tie = document.getElementById("tie");
+        var User = x;
+        var Dator = Math.floor(Math.random() * 3) + 1;
+        if (User == Dator) {
+          document.getElementById('result').innerHTML = "Lika";
+          if (User == 1) {
+            document.getElementById('du').innerHTML = "Du valde: Sten";
+            document.getElementById('dat').innerHTML = "Datorn valde: Sten";
+            tie.play();
+          }else if (User == 2) {
+            document.getElementById('du').innerHTML = "Du valde: Sax";
+            document.getElementById('dat').innerHTML = "Datorn valde: Sax";
+            tie.play();
+          }else if (User == 3) {
+            document.getElementById('du').innerHTML = "Du valde: Papper";
+            document.getElementById('dat').innerHTML = "Datorn valde: Papper";
+            tie.play();
+          }
+        }else if (User == 1) {
+          if (Dator == 3) {
+            document.getElementById('result').innerHTML = "Du förlorade";
+            document.getElementById('du').innerHTML = "Du valde: Sten";
+            document.getElementById('dat').innerHTML = "Datorn valde: Papper";
+            lose.play();
+          }else {
+            document.getElementById('result').innerHTML = "Du vann";
+            document.getElementById('du').innerHTML = "Du valde: Sten";
+            document.getElementById('dat').innerHTML = "Datorn valde: Sax";
+            win.play();
+          }
+        }else if (User == 2) {
+          if (Dator == 3) {
+            document.getElementById('result').innerHTML = "Du vann";
+            document.getElementById('du').innerHTML = "Du valde: Sax";
+            document.getElementById('dat').innerHTML = "Datorn valde: Papper";
+            win.play();
+          }else {
+            document.getElementById('result').innerHTML = "Du förlorade";
+            document.getElementById('du').innerHTML = "Du valde: Sax";
+            document.getElementById('dat').innerHTML = "Datorn valde: Sten";
+            lose.play();
+          }
+        }else {
+          if (Dator == 2) {
+            document.getElementById('result').innerHTML = "Du förlorade";
+            document.getElementById('du').innerHTML = "Du valde: Papper";
+            document.getElementById('dat').innerHTML = "Datorn valde: Sax";
+            lose.play();
+          }else {
+            document.getElementById('result').innerHTML = "Du vann";
+            document.getElementById('du').innerHTML = "Du valde: Papper";
+            document.getElementById('dat').innerHTML = "Datorn valde: Sten";
+            win.play();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
